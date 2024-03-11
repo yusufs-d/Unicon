@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
+      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/image/ss.png",
+      "PackagePath": "staticwebassets/image/ss.png"
+    },
+    {
       "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

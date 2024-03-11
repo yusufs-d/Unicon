@@ -1,0 +1,19 @@
+@model Instructor
+<h3>Yeni Öğretim Elemanı Oluştur</h3>
+<hr>
+<div class="row mt-3 col-md-4">
+<form asp-controller="Instructor" asp-action="Create" method="post">
+        <div class="mb-3">
+        <label asp-for="InstructorName" class="form-label"></label>
+        <input asp-for="InstructorName" class="form-control">
+    <div class="mb-3">
+        <label asp-for="CoursesGiven" class="form-label">Verilen Dersler</label>
+        <select asp-for="CoursesGiven" asp-items="ViewBag.Courses" class="form-control">
+            <option value="">Seçiniz</option>
+        </select>
+    </div>
+    <input type="hidden" asp-for="InstructorPoint" value="0">
+
+    <button type="submit" class="btn btn-secondary">Kaydet</button>
+</form>
+</div>

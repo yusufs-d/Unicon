@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Unicon.Data;
@@ -11,9 +12,11 @@ using Unicon.Data;
 namespace Unicon.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240311204331_ChangeOnCourseModel")]
+    partial class ChangeOnCourseModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,7 +74,7 @@ namespace Unicon.Migrations
                     b.Property<int>("CoursePoint")
                         .HasColumnType("integer");
 
-                    b.Property<int>("InstructorId")
+                    b.Property<int?>("InstructorId")
                         .HasColumnType("integer");
 
                     b.HasKey("CourseId");
@@ -99,11 +102,11 @@ namespace Unicon.Migrations
 
             modelBuilder.Entity("Unicon.Data.Instructor", b =>
                 {
-                    b.Property<int>("InstructorId")
+                    b.Property<int>("InstructorID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("InstructorId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("InstructorID"));
 
                     b.Property<string>("InstructorName")
                         .IsRequired()
@@ -113,7 +116,7 @@ namespace Unicon.Migrations
                     b.Property<int>("InstructorPoint")
                         .HasColumnType("integer");
 
-                    b.HasKey("InstructorId");
+                    b.HasKey("InstructorID");
 
                     b.ToTable("Instructors");
                 });
@@ -179,9 +182,7 @@ namespace Unicon.Migrations
                 {
                     b.HasOne("Unicon.Data.Instructor", "Instructor")
                         .WithMany("CoursesGiven")
-                        .HasForeignKey("InstructorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("InstructorId");
 
                     b.Navigation("Instructor");
                 });
