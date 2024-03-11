@@ -9,10 +9,11 @@ namespace Unicon.Data
     public class Instructor
     {
         [Key]
-        public int InstructorID { get; set; }
+        public int InstructorId { get; set; }
 
         [StringLength(50, ErrorMessage = "Eğitmen ismi en fazla 50 karakter olmalıdır!")]
         [Required(ErrorMessage = "Eğitmen ismi girilmek zorunludur!")]
+        [Display(Name = "Öğretim Elemanı Adı")]
         public string? InstructorName {get; set; }
 
         public int InstructorPoint  { get; set; }

@@ -1,0 +1,51 @@
+@model IEnumerable<Instructor>
+
+<h3>Öğretim Elemanları</h3>
+<hr>
+<div class="form-floating  mb-3 col-md-4 rounded">
+  <input type="text" class="form-control" id="floatingInput" placeholder="Ders ara...">
+  <label for="floatingInput">Öğretim Elemanı ara...</label>
+</div>
+
+
+<div class="container mt-5">
+  <div class="row">
+
+    @foreach(var instructor in Model){
+
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">@instructor.InstructorName</h5>
+          <p class="card-text"><b>Puan: </b>@instructor.InstructorPoint</p>
+        </div>
+      </div>
+    </div>
+
+    }
+
+
+
+  </div>
+
+  <!-- Sayfalama -->
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mt-4">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Önceki</a>
+      </li>
+      <li class="page-item active" aria-current="page">
+        <span class="page-link">1</span>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">2</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">3</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">Sonraki</a>
+      </li>
+    </ul>
+  </nav>
+</div>
