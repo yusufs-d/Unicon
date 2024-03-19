@@ -1,0 +1,23 @@
+@model Course
+
+
+<div class="modal fade" id="ins-del-approve-@Model.CourseId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Onay</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start">
+        <b>@Model.CourseName</b> isimli <b>@Model.CourseCode</b> dersi silinecektir! <br> Onaylıyor musunuz ?
+      </div>
+      <div class="modal-footer">
+    <form asp-action="Delete" method="post">
+        <input type="hidden" value="@Model.CourseId" name="id">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+        <button type="submit" class="btn btn-danger">Sil</button>
+    </form>
+      </div>
+    </div>
+  </div>
+</div>

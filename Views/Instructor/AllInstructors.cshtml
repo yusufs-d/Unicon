@@ -1,28 +1,34 @@
 @model IEnumerable<Instructor>
 
-<h3>Öğretim Elemanları</h3>
-<hr>
-<div class="form-floating  mb-3 col-md-4 rounded">
-  <input type="text" class="form-control" id="floatingInput" placeholder="Ders ara...">
-  <label for="floatingInput">Öğretim Elemanı ara...</label>
-</div>
-
 
 <div class="container mt-5">
+  <h3>Öğretim Elemanları</h3>
+  <hr>
+  <div class="form-floating  mb-3 col-md-4 rounded">
+    <input type="text" class="form-control" id="floatingInput" placeholder="Ders ara...">
+    <label for="floatingInput">Öğretim Elemanı ara...</label>
+  </div>
+
   <div class="row">
 
-    @foreach(var instructor in Model){
-
-    <div class="col-md-6 mb-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">@instructor.InstructorName</h5>
-          <p class="card-text"><b>Puan: </b>@instructor.InstructorPoint</p>
+    @foreach (var instructor in Model)
+    {
+      <div class="col-md-6 mb-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title"><b>@instructor.InstructorName</b></h5>
+            <p class="card-text"><b>Puan: </b>@instructor.InstructorPoint</p>
+            <p class="card-text"><b>Verilen Dersler: </b>
+              @foreach (var course in instructor.CoursesGiven)
+              {
+                <span class="badge bg-primary">@course.CourseName</span>
+              }
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-
     }
+
 
 
 
@@ -49,3 +55,4 @@
     </ul>
   </nav>
 </div>
+

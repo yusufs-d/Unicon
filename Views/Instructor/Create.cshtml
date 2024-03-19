@@ -6,14 +6,12 @@
         <div class="mb-3">
         <label asp-for="InstructorName" class="form-label"></label>
         <input asp-for="InstructorName" class="form-control">
-    <div class="mb-3">
-        <label asp-for="CoursesGiven" class="form-label">Verilen Dersler</label>
-        <select asp-for="CoursesGiven" asp-items="ViewBag.Courses" class="form-control">
-            <option value="">Seçiniz</option>
-        </select>
-    </div>
+
+
     <input type="hidden" asp-for="InstructorPoint" value="0">
 
-    <button type="submit" class="btn btn-secondary">Kaydet</button>
+    <button type="submit" class="btn btn-secondary mt-3 ">Kaydet</button>
 </form>
+
+</div>
 </div>

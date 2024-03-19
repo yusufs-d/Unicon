@@ -1,47 +1,28 @@
+using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
-using System.ComponentModel;
 
 namespace Unicon.Data
 {
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        public int UserId { get; set; }
-
         [Display(Name = "Gerçek ad")]
         public string? RealName { get; set; }
 
         [Required(ErrorMessage = "Kullanıcı adı girmek zorunludur!")]
-        [StringLength(20,ErrorMessage =("Kullanıcı adı 20 karakterden uzun olamaz!"))]
+        [StringLength(20, ErrorMessage = "Kullanıcı adı 20 karakterden uzun olamaz!")]
         [Display(Name = "Kullanıcı adı")]
-        public string? Username { get; set; }
+        override public string? UserName { get; set; }
 
-        [Required(ErrorMessage = "Eposta adresi girmek zorunludur!")]
-        [EmailAddress(ErrorMessage = "Lütfen geçerli formatta bir eposta adresi giriniz!")]
-        [Display(Name = "Eposta adresi")]
-        public string? Email {get; set;}
 
-        [Required(ErrorMessage = "Parola girmen zorunludur!")]
-        [PasswordPropertyText]
-        [Display(Name ="Parola")]
-        public string? Password {get; set;}
-
-        [Phone(ErrorMessage = "Lüften uygun formatta telefon numarası giriniz!")]
+        [Phone(ErrorMessage = "Lütfen uygun formatta telefon numarası giriniz!")]
         [Display(Name = "Telefon Numarası")]
-        public string? PhoneNumber {get;set;}
+        public new string? PhoneNumber { get; set; }
 
         [Required]
-        public DateTime CreateDate {get;set;}
+        public DateTime CreateDate { get; set; }
 
         [Required]
-        public bool isActive {get;set;}
-
-
-        
+        public bool IsActive { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "W1xKePkyxxJ2tdxvzgc4giQv/sdu9sgw4h0dFW3FkbQ=",
+  "Hash": "aXMrYaUtDsg4MsjFT7dP94SRlaL9IvHemGnTnNkswfM=",
   "Source": "Unicon",
   "BasePath": "_content/Unicon",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/site.css"
+    },
+    {
+      "Identity": "/Users/yusufs/Desktop/Unicon/wwwroot/css/table.css",
+      "SourceId": "Unicon",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/yusufs/Desktop/Unicon/wwwroot/",
+      "BasePath": "_content/Unicon",
+      "RelativePath": "css/table.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/table.css"
     },
     {
       "Identity": "/Users/yusufs/Desktop/Unicon/wwwroot/favicon.ico",

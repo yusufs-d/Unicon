@@ -1,0 +1,55 @@
+@model IEnumerable<Instructor>
+
+<h2>Öğretim Elemanı Yönetimi</h2>
+<hr>
+<a class="btn btn-secondary mb-3" asp-action="Create">
+    <i class="bi bi-person-add"></i>
+    Öğretim Üyesi Ekle
+</a>
+<table id="dtable" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Ad-Soyad</th>
+            <th>Puan</th>
+            <th>Verilen Dersler</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var instructor in Model)
+        {
+            <tr>
+                <td>@instructor.InstructorName</td>
+                <td>@instructor.InstructorPoint</td>
+                <td>
+                    @foreach (var course in instructor.CoursesGiven)
+                    {
+                        @course.CourseName
+
+                        <span>,</span>
+                    }
+                </td>
+                <td>
+                    <div class="col text-end">
+
+                        <a  asp-action="Edit" asp-route-id="@instructor.InstructorId" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ins-del-approve-@instructor.InstructorId">
+                        <i class="bi bi-trash"></i>
+                        </button>
+
+                        @await Html.PartialAsync("_ApproveModal",instructor)
+
+
+
+
+                    </div>
+                </td>
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>
+
