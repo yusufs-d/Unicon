@@ -1,0 +1,19 @@
+@model Instructor
+<h3>Öğretim Elemanını Düzenle</h3>
+<hr>
+<div class="row mt-3 col-md-4">
+<form asp-controller="Instructor" asp-action="Edit" method="post">
+        <div class="mb-3">
+        <input type="hidden" asp-for="@Model.InstructorId">
+
+        <label asp-for="InstructorName" class="form-label"></label>
+        <input asp-for="InstructorName" class="form-control">
+
+
+    <input type="hidden" asp-for="InstructorPoint" value="@Model.InstructorPoint">
+
+    <button type="submit" class="btn btn-secondary mt-3 ">Güncelle</button>
+</form>
+
+</div>
+</div>

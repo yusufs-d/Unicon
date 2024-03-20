@@ -1,0 +1,25 @@
+@model Course
+<h3>Dersi Düzenle</h3>
+<hr>
+<div class="row mt-3 col-md-4">
+<form asp-controller="Course" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="@Model.CourseId">
+        <div class="mb-3">
+        <label asp-for="CourseCode" class="form-label"></label>
+        <input asp-for="CourseCode" class="form-control">
+    </div>
+        <div class="mb-3">
+        <label asp-for="CourseName" class="form-label"></label>
+        <input asp-for="CourseName" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="InstructorId" class="form-label">Öğretim Elemanı</label>
+        <select asp-for="InstructorId" asp-items="ViewBag.Instructors" class="form-control">
+        </select>
+    </div>
+    
+    <input type="hidden" asp-for="CoursePoint" value="@Model.CoursePoint">
+
+    <button type="submit" class="btn btn-secondary">Güncelle</button>
+</form>
+</div>

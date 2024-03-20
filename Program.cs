@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Unicon.Data;
 
@@ -11,6 +12,14 @@ builder.Services.AddDbContext<DataContext>(options => {
     var connectionString = config.GetConnectionString("database");
     options.UseNpgsql(connectionString);
 });
+
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    // Identity ayarlarını burada yapılandırabilirsiniz
+})
+    .AddEntityFrameworkStores<DataContext>()
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

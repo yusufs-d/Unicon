@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
+      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/css/table.css",
+      "PackagePath": "staticwebassets/css/table.css"
+    },
+    {
       "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },

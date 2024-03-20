@@ -1,0 +1,51 @@
+@model IEnumerable<Course>
+
+<h2>Ders Yönetimi</h2>
+<hr>
+<a class="btn btn-secondary mb-3" asp-action="Create">
+  <i class="bi bi-file-earmark-plus"></i>
+    Ders Ekle
+</a>
+<table id="dtable" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Ders Kodu</th>
+            <th>Ders Adı</th>
+            <th>Öğretim Elemanı</th>
+            <th>Puan</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.CourseCode</td>
+                <td>@course.CourseName</td>
+                <td>@course.Instructor.InstructorName</td>
+                <td>@course.CoursePoint</td>
+
+                <td>
+                    <div class="col text-end">
+
+                        <a  asp-action="Edit" asp-route-id="@course.CourseId" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ins-del-approve-@course.CourseId">
+                        <i class="bi bi-trash"></i>
+                        </button>
+
+                        @await Html.PartialAsync("_ApproveModal",course)
+
+
+
+
+                    </div>
+                </td>
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>
+
