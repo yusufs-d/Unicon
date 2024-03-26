@@ -1,23 +1,39 @@
 @model IEnumerable<Instructor>
 
 
-<div class="container mt-5">
-  <h3>Öğretim Elemanları</h3>
+  <h3>Hocalar</h3>
   <hr>
-  <div class="form-floating  mb-3 col-md-4 rounded">
-    <input type="text" class="form-control" id="floatingInput" placeholder="Ders ara...">
-    <label for="floatingInput">Öğretim Elemanı ara...</label>
+<div class="col-md-4 mb-3">
+  <div class="input-group rounded">
+    <input type="search" class="form-control rounded border-dark" placeholder="Hoca Ara..." aria-label="Search" aria-describedby="search-addon" onkeyup="searchCourses(this.value)" />
+    <span class="input-group-text border-dark" id="search-addon">
+      <i class="bi bi-search"></i>
+    </span>
   </div>
+</div>
 
   <div class="row">
+    <div id="no-match-message" class="text-center text-muted" style="display: none; margin-top: 10px;"><h5>Eşleşen sonuç yok</h5></div>
 
     @foreach (var instructor in Model)
     {
-      <div class="col-md-6 mb-3">
-        <div class="card shadow">
+      <div class="col-md-6 mb-3 instructor-card">
+        <div class="card border-dark">
           <div class="card-body">
-            <h5 class="card-title"><b>@instructor.InstructorName</b></h5>
-            <p class="card-text"><b>Puan: </b>@instructor.InstructorPoint</p>
+            <h5 class="card-title"><b><a style="text-decoration: none;" class = "text-dark" asp-action="InstructorDetail" asp-route-id="@instructor.InstructorId">@instructor.InstructorName</a></b></h5>
+          <p class="card-text"><b>Puan: </b>
+          @if(instructor.InstructorPoint >= 0 && instructor.InstructorPoint <= 4){
+            <span class="badge bg-danger">@instructor.InstructorPoint</span>
+          }
+          @if(instructor.InstructorPoint > 4 && instructor.InstructorPoint <= 7){
+            <span class="badge bg-warning">@instructor.InstructorPoint</span>
+          }
+          @if(instructor.InstructorPoint > 7 && instructor.InstructorPoint <= 10){
+            <span class="badge bg-success">@instructor.InstructorPoint</span>
+          }
+          
+          
+          </p>
             <p class="card-text"><b>Verilen Dersler: </b>
               @foreach (var course in instructor.CoursesGiven)
               {
@@ -32,27 +48,30 @@
 
 
 
-  </div>
 
-  <!-- Sayfalama -->
-  <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center mt-4">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Önceki</a>
-      </li>
-      <li class="page-item active" aria-current="page">
-        <span class="page-link">1</span>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">3</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">Sonraki</a>
-      </li>
-    </ul>
-  </nav>
-</div>
+ 
 
+@section Scripts{
+  <script>
+      function searchCourses(value) {
+        var cards = document.querySelectorAll('.instructor-card');
+        var found = false;
+        cards.forEach(function (card) {
+          var instructorName = card.querySelector('.card-title').innerText.toLowerCase();
+  
+          if (instructorName.includes(value.toLowerCase())) {
+            card.style.display = 'block';
+            found = true;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if(!found){
+          document.getElementById('no-match-message').style.display = 'block';
+        }else{
+          document.getElementById('no-match-message').style.display = 'none';
+        }
+      }
+    </script>
+}

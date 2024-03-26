@@ -2,50 +2,58 @@
 
 <h3>Dersler</h3>
 <hr>
-<div class="form-floating  mb-3 col-md-4 rounded">
-  <input type="text" class="form-control" id="floatingInput" placeholder="Ders ara...">
-  <label for="floatingInput">Ders ara...</label>
+<div class="col-md-4 mb-3">
+  <div class="input-group rounded">
+    <input type="search" class="form-control rounded border-dark" placeholder="Ders Ara..." aria-label="Search" aria-describedby="search-addon" onkeyup="searchCourses(this.value)" />
+    <span class="input-group-text border-dark" id="search-addon">
+      <i class="bi bi-search"></i>
+    </span>
+  </div>
 </div>
 
-
-<div class="container mt-5">
-  <div class="row">
-
-    @foreach(var course in Model){
-
-    <div class="col-md-6 mb-3">
-      <div class="card">
+<div class="row">
+  @foreach(var course in Model){
+    <div class="col-md-6 mb-3 course-card">
+      <div class="card border-dark ">
         <div class="card-body">
-          <h5 class="card-title">@course.CourseCode</h5>
-          <p class="card-text">@course.CourseName</p>
+          <h5 class="card-title"><b><a style="text-decoration: none;" class = "text-dark" asp-route-id="@course.CourseId" asp-controller="Course" asp-action="CourseDetail">@course.CourseCode</a></b></h5>
+          <p class="card-text"><b>@course.CourseName</b></p>
+          <p class="card-text"><i class="bi bi-person-video3"></i> @course.Instructor.InstructorName</p>
+          <p class="card-text"><b>Puan: </b>
+          @if(course.CoursePoint >= 0 && course.CoursePoint <= 4){
+            <span class="badge bg-danger">@course.CoursePoint</span>
+          }
+          @if(course.CoursePoint > 4 && course.CoursePoint <= 7){
+            <span class="badge bg-warning">@course.CoursePoint</span>
+          }
+          @if(course.CoursePoint > 7 && course.CoursePoint <= 10){
+            <span class="badge bg-success">@course.CoursePoint</span>
+          }
+          </p>
         </div>
       </div>
     </div>
-
-    }
-
-
-
-  </div>
-
-  <!-- Sayfalama -->
-  <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center mt-4">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Önceki</a>
-      </li>
-      <li class="page-item active" aria-current="page">
-        <span class="page-link">1</span>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">3</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">Sonraki</a>
-      </li>
-    </ul>
-  </nav>
+  }
 </div>
+
+
+
+@section Scripts{
+   
+  
+  <script>
+      function searchCourses(value) {
+        var cards = document.querySelectorAll('.course-card');
+        cards.forEach(function (card) {
+          var courseCode = card.querySelector('.card-title').innerText.toLowerCase();
+          var courseName = card.querySelector('.card-text:nth-of-type(1)').innerText.toLowerCase();
+          var instructorName = card.querySelector('.card-text:nth-of-type(2)').innerText.toLowerCase();
+          if (courseCode.includes(value.toLowerCase()) || instructorName.includes(value.toLowerCase()) || courseName.includes(value.toLowerCase())) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+    </script>
+}

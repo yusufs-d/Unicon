@@ -1,51 +1,71 @@
 ﻿  <div class="container my-5">
-    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 shadow-lg">
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-        <h1 class="display-4 fw-bold lh-1 text-body-emphasis">Border hero with cropped image and shadows</h1>
-        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+        <h1 class="display-4 fw-bold lh-1 text-body-emphasis">Üniversite yaşamın artık daha kolay ve <b><u>sosyal</u></b></h1>
+        <p class="lead">Siz de üniversite hayatınızı daha keyifli hale getirmek ve sosyalleşmek için harika bir platform arıyorsanız doğru yerdesiniz! Üniversite öğrencileri için tasarlanan bu platform, size birçok avantaj sunuyor. Hemen ihtiyacın olana tıkla ve üniversite maceranı taçlandır.</p>
 
       </div>
-      <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-          <img class="rounded-lg-3" src="~/image/ss.png" alt="" width="720">
+      <div class="col-lg-5 p-0 overflow-hidden p-1">
+          <img class="rounded-lg-3" src="~/image/youth.png" alt="" width="520">
       </div>
     </div>
   </div>
-  <div class="container ">
-    <div class="row">
-    <div class="col">
-      <div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="~/image/ss.png" class="img-fluid rounded-start" alt="...">
+   
+
+  <div class="row justify-content-center">
+<div class="col">
+    <div class="card mb-3" style="max-width: 100%; min-height: 100%; overflow: hidden;">
+        <div class="row g-0">
+            <div class="col-md-4 p-3">
+                <img src="~/image/books.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body ">
+                    <h5 class="card-title">Dersler</h5>
+                    <p class="card-text">Almak istediğin ama hakkında bilgi sahibi olmadığın derslerin öğrenci yorumlarına gözat! Üstelik sen de yorum yaparak diğer öğrencilere yardım edebilirsin!</p>
+                    <a style="text-decoration: none;" asp-action="AllCourses" asp-controller="Course"><i class="bi bi-arrow-down-right-square-fill"></i> Tüm Dersler </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-  </div>
 </div>
-    </div>
     <div class="col">
-      <div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="~/image/ss.png" class="img-fluid rounded-start" alt="...">
+        <div class="card mb-3"style="max-width: 100%; min-height: 100%; overflow: hidden;">
+            <div class="row g-0">
+                <div class="col-md-4 p-3">
+                    <img src="~/image/teacher.png" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Hocalar</h5>
+                        <p class="card-text">Üniversitendeki hocalar hakkında öğrenci yorumlarına gözat ve bilgi sahibi ol! Sen de bir hoca hakkında yorumda bulunarak topluluğa katkı sağla!</p>
+ <a  style="text-decoration: none;" asp-action="AllInstructors" asp-controller="Instructor"><i class="bi bi-arrow-down-right-square-fill"></i> Tüm Hocalar </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-  </div>
+
+
 </div>
+
+<div style="height: 15vh;"></div>
+
+ <div class="container rounded bg-primary text-light">
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 ">
+        <div class="col-md-4 d-flex align-items-center">
+ 
+          <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Unicon. Tüm hakları saklıdır.</span>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+          <li class="ms-3"><i class="bi bi-card-list"></i> <b>References: </b></li>
+          <li class="ms-3"> <a class = "text-light" href="https://www.flaticon.com/free-icons/people" title="people icons">
+              People icons created by Freepik - Flaticon
+            </a></li>
+          <li class="ms-3"><a class = "text-light" href="https://www.flaticon.com/free-icons/teacher" title="teacher icons">Teacher icons created by Freepik - Flaticon</a></li>
+          <li class="ms-3"><a class = "text-light" href="https://www.flaticon.com/free-icons/books" title="books icons">Books icons created by Freepik - Flaticon</a></li>
+
+        </ul>
+      </footer>
     </div>
-  </div>
-
-
-  </div>
-  

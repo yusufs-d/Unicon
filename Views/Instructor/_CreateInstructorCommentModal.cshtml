@@ -1,0 +1,36 @@
+@model InstructorDetailViewModel
+
+<form asp-action="Create" asp-controller="Comment" method="post">
+  <input type="hidden" name="commentType" value="1">
+  <input type="hidden" value="@Model.Instructor.InstructorId">
+  <input asp-for="@Model.CommentToAdd.RelatedID"  type="hidden" value="@Model.Instructor.InstructorId">
+    <input asp-for="@Model.CommentToAdd.CommentType"  type="hidden" value="0">
+<!-- Modal -->
+<div class="modal fade" id="create-comment-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Yorum Ekle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <label asp-for="CommentToAdd.CommentContent"></label>
+        <input asp-for="CommentToAdd.CommentContent" class="form-control">
+        <span asp-validation-for="CommentToAdd.CommentContent" class="text-danger"></span>
+
+        <label asp-for="CommentToAdd.Point"></label>
+        <input asp-for="CommentToAdd.Point" class="form-control" type="number" min="0" max="10"  />
+        <span asp-validation-for="CommentToAdd.Point" class="text-danger"></span>     
+
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+        <button type="submit" class="btn btn-primary">Ekle</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
+</form>

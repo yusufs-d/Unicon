@@ -30,6 +30,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ291cnNlL0FsbENvdXJzZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/yusufs/Desktop/Unicon/Views/Course/CourseDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ291cnNlL0NvdXJzZURldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/yusufs/Desktop/Unicon/Views/Course/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ291cnNlL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -46,12 +50,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ291cnNlL19BcHByb3ZlTW9kYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/yusufs/Desktop/Unicon/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[/Users/yusufs/Desktop/Unicon/Views/Course/_CreateCourseCommentModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ291cnNlL19DcmVhdGVDb3Vyc2VDb21tZW50TW9kYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/yusufs/Desktop/Unicon/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[/Users/yusufs/Desktop/Unicon/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/yusufs/Desktop/Unicon/Views/Instructor/AllInstructors.cshtml]
@@ -66,6 +70,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5zdHJ1Y3Rvci9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/yusufs/Desktop/Unicon/Views/Instructor/InstructorDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5zdHJ1Y3Rvci9JbnN0cnVjdG9yRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/yusufs/Desktop/Unicon/Views/Instructor/ManageInstructors.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5zdHJ1Y3Rvci9NYW5hZ2VJbnN0cnVjdG9ycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -74,8 +82,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5zdHJ1Y3Rvci9fQXBwcm92ZU1vZGFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/yusufs/Desktop/Unicon/Views/Instructor/_CreateInstructorCommentModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5zdHJ1Y3Rvci9fQ3JlYXRlSW5zdHJ1Y3RvckNvbW1lbnRNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/yusufs/Desktop/Unicon/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/yusufs/Desktop/Unicon/Views/Shared/_LoginLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2dpbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/yusufs/Desktop/Unicon/Views/Shared/_ValidationScriptsPartial.cshtml]
@@ -88,6 +104,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/yusufs/Desktop/Unicon/Views/User/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/yusufs/Desktop/Unicon/Views/User/RegisterDraft.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZWdpc3RlckRyYWZ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/yusufs/Desktop/Unicon/Views/User/UserList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9Vc2VyTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/yusufs/Desktop/Unicon/Views/User/_ApproveAdminModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9fQXBwcm92ZUFkbWluTW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/yusufs/Desktop/Unicon/Views/User/_ApproveModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9fQXBwcm92ZU1vZGFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/yusufs/Desktop/Unicon/Views/_ViewImports.cshtml]
