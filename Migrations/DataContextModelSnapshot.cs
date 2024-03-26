@@ -46,6 +46,14 @@ namespace Unicon.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c229c544-68c2-4ac8-a3b6-295968cdf7d9",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -166,23 +174,24 @@ namespace Unicon.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("CommentedById")
-                        .HasColumnType("text");
-
-                    b.Property<int>("EntityId")
+                    b.Property<int>("CommentType")
                         .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Point")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("RelatedID")
                         .HasColumnType("integer");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("CommentedById");
-
-                    b.HasIndex("EntityId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -203,8 +212,8 @@ namespace Unicon.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("CoursePoint")
-                        .HasColumnType("integer");
+                    b.Property<double>("CoursePoint")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("InstructorId")
                         .HasColumnType("integer");
@@ -214,22 +223,6 @@ namespace Unicon.Migrations
                     b.HasIndex("InstructorId");
 
                     b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("Unicon.Data.Entity", b =>
-                {
-                    b.Property<int>("EntityId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EntityId"));
-
-                    b.Property<string>("EntityName")
-                        .HasColumnType("text");
-
-                    b.HasKey("EntityId");
-
-                    b.ToTable("Entities");
                 });
 
             modelBuilder.Entity("Unicon.Data.Instructor", b =>
@@ -245,8 +238,8 @@ namespace Unicon.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<int>("InstructorPoint")
-                        .HasColumnType("integer");
+                    b.Property<double>("InstructorPoint")
+                        .HasColumnType("double precision");
 
                     b.HasKey("InstructorId");
 
@@ -382,17 +375,9 @@ namespace Unicon.Migrations
                 {
                     b.HasOne("Unicon.Data.User", "CommentedBy")
                         .WithMany()
-                        .HasForeignKey("CommentedById");
-
-                    b.HasOne("Unicon.Data.Entity", "EntityType")
-                        .WithMany()
-                        .HasForeignKey("EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("CommentedBy");
-
-                    b.Navigation("EntityType");
                 });
 
             modelBuilder.Entity("Unicon.Data.Course", b =>

@@ -1,0 +1,99 @@
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<User>
+
+@inject UserManager<User> _userManager
+
+
+
+
+
+
+
+
+<h2>Kullanıcı Yönetimi</h2>
+<hr>
+
+<table id="dtable" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Kullanıcı adı</th>
+            <th>Gerçek İsim</th>
+            <th>E-posta</th>
+            <th>Oluşturulma Tarihi</th>
+            <th>Aktif</th>
+            <th>Rol</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+
+            var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+
+
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.RealName</td>
+                <td>@user.Email</td>
+                <td>@user.CreateDate</td>
+                @if (user.IsActive)
+                {
+                    <td>Evet</td>
+                }
+                @if (!user.IsActive)
+                {
+                    <td>Hayır</td>
+                }
+
+                @if (isAdmin)
+                {
+                    <td>Admin</td>
+                }
+                @if (!isAdmin)
+                {
+                    <td>Kullanıcı</td>
+                }
+
+                <td>
+
+                    <div class="col text-end">
+
+                        @if (isAdmin)
+                        {
+                            <a class = "btn btn-secondary" asp-action="RemoveAdminRole" asp-route-userId="@user.Id">
+                                <i class="bi bi-person-fill-dash"></i>
+                            </a>
+                           
+                            
+                        }
+                        @if(!isAdmin){
+                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#usr-admin-approve-@user.Id">
+                                <i class="bi bi-person-badge"></i>
+                            </button>
+                            @await Html.PartialAsync("_ApproveAdminModal", user)
+
+                        }
+
+
+
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#usr-del-approve-@user.Id">
+                            <i class="bi bi-trash"></i>
+                        </button>
+
+                        @await Html.PartialAsync("_ApproveModal", user)
+
+
+
+
+                    </div>
+                </td>
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>

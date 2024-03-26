@@ -16,7 +16,7 @@ namespace Unicon.Data
         [Display(Name = "Öğretim Elemanı Adı")]
         public string? InstructorName {get; set; }
 
-        public int InstructorPoint  { get; set; }
+        public double InstructorPoint  { get; set; }
 
         public ICollection<Course> CoursesGiven { get; set; } = new List<Course>();
 

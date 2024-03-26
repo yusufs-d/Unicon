@@ -236,3 +236,6 @@
 /Users/yusufs/Desktop/Unicon/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Drawing.Common.dll
 /Users/yusufs/Desktop/Unicon/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Security.Cryptography.ProtectedData.dll
 /Users/yusufs/Desktop/Unicon/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Windows.Extensions.dll
+/Users/yusufs/Desktop/Unicon/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.UI.dll
+/Users/yusufs/Desktop/Unicon/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Embedded.dll
+/Users/yusufs/Desktop/Unicon/obj/Debug/net8.0/Unicon.MvcApplicationPartsAssemblyInfo.cs

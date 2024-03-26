@@ -17,7 +17,7 @@ namespace Unicon.Data
         [Display(Name = "Kurs Adı")]
         public string? CourseName { get; set; }
 
-        public int CoursePoint { get; set; }
+        public double CoursePoint { get; set; }
 
         public int InstructorId {get; set; }
 

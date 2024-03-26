@@ -1,0 +1,185 @@
+@model InstructorDetailViewModel
+
+
+@if (TempData["ErrorMessages"] is string[] errorMessages)
+{
+    <div class="alert alert-danger">
+    <ul>
+        @foreach (var errorMessage in errorMessages)
+            {
+                @if (errorMessage.StartsWith("The value"))
+                {
+                    <p>
+                        Lütfen puan verin!
+                    </p>
+                }
+                @if (!errorMessage.StartsWith("The value"))
+                {
+                    <p>
+                    <p>@errorMessage</p>
+                    </p>
+                }
+
+            }
+        </ul>
+    </div>
+}
+
+
+
+
+<div class="row">
+    <div class="col-md-3 border border-dark rounded-3">
+        <br>
+        <div class="col">
+            @if (Model.Instructor != null)
+            {
+
+                <div class="row mb-1">
+                    <h5><b>@Model.Instructor.InstructorName</b></h5>
+
+                </div>
+
+                <div class="row mb-1">
+                    <p><b>Verilen Dersler:</b> 
+                    @foreach(var course in Model.Instructor.CoursesGiven){
+                        <span class = "badge bg-primary">
+                            <a asp-action="CourseDetail" asp-controller="Course"></a> @course.CourseName</span>
+                    }</p>
+
+                </div>
+
+   
+                <div class="row mb-3">
+                    <p><b>Puan: </b>
+
+                </div>
+
+                            <div class="row mb-3">
+                <div class="col-md-6">
+        @if(Model.Instructor.InstructorPoint >= 0 && Model.Instructor.InstructorPoint <= 4){
+                        <div class="progress pink">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">@Model.Instructor.InstructorPoint</div>
+            </div>
+          }
+          @if(Model.Instructor.InstructorPoint > 4 && Model.Instructor.InstructorPoint <= 7){
+                        <div class="progress yellow">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">@Model.Instructor.InstructorPoint</div>
+            </div>
+          }
+          @if(Model.Instructor.InstructorPoint > 7 && Model.Instructor.InstructorPoint <= 10){
+                        <div class="progress green">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">@Model.Instructor.InstructorPoint</div>
+            </div>
+          }
+
+               
+               
+
+                </div>
+            </div>
+            }
+
+            <div class="row mb-3">
+                <div class="col ">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#create-comment-modal">
+                    <i class="bi bi-chat-text"></i> Yorum Ekle
+                </button>
+                @await Html.PartialAsync("_CreateInstructorCommentModal", @Model)
+                </div>
+
+            </div>
+
+
+
+     
+
+            
+
+            
+        </div>
+
+
+    </div>
+    <div class=" col-md-9  rounded-3">
+        <br>
+        <div style="max-height: 60vh; overflow-y: auto;">
+            @if (Model.Comments != null && Model.Comments.Any())
+            {
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="card mb-2 border-dark">
+                        <div class="row no-gutters">
+                            <div class="col-md-12">
+                                <div class="card-body">
+                                    @if (comment.CommentedBy != null)
+                                    {
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="card-title">@comment.CommentedBy.UserName</h5>
+
+                                            </div>
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                <div class="col text-end">
+                                                    <a asp-action="Delete" asp-controller="Comment" class="btn btn-danger" asp-route-id="@comment.CommentId">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            }
+
+
+                                        </div>
+                                    }
+                                    <p class="card-text">@comment.CommentContent</p>
+                                                        <p><b>Puan: </b>
+          @if(comment.Point >= 0 && comment.Point <= 4){
+            <span class="badge bg-danger">@comment.Point</span>
+          }
+          @if(comment.Point > 4 && comment.Point <= 7){
+            <span class="badge bg-warning">@comment.Point</span>
+          }
+          @if(comment.Point > 7 && comment.Point <= 10){
+            <span class="badge bg-success">@comment.Point</span>
+          }
+                                    <p class="card-text"><small class="text-muted">@comment.CreateDate</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+            // Comments listesi boşsa bu kısım çalışır
+                <h5 class="text-muted text-center">Henüz yorum bulunmamaktadır.</h5>
+            }
+
+
+
+
+        </div> <!-- END - Comments Section -->
+
+
+
+    </div>
+</div>

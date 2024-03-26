@@ -12,5 +12,9 @@ namespace Unicon.Models
         [DataType(DataType.Password)]
         [Display(Name = "Parola")]
         public string? Password { get; set; }
+
+
+
+
     }
 }

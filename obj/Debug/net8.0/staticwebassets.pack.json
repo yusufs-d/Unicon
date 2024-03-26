@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets/Unicon.bundle.scp.css"
     },
     {
+      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/css/login.css",
+      "PackagePath": "staticwebassets/css/login.css"
+    },
+    {
+      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/css/progressBar.css",
+      "PackagePath": "staticwebassets/css/progressBar.css"
+    },
+    {
       "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
@@ -17,8 +25,28 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/image/ss.png",
-      "PackagePath": "staticwebassets/image/ss.png"
+      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/image/book.png",
+      "PackagePath": "staticwebassets/image/book.png"
+    },
+    {
+      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/image/books.png",
+      "PackagePath": "staticwebassets/image/books.png"
+    },
+    {
+      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/image/graduation.png",
+      "PackagePath": "staticwebassets/image/graduation.png"
+    },
+    {
+      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/image/school.png",
+      "PackagePath": "staticwebassets/image/school.png"
+    },
+    {
+      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/image/teacher.png",
+      "PackagePath": "staticwebassets/image/teacher.png"
+    },
+    {
+      "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/image/youth.png",
+      "PackagePath": "staticwebassets/image/youth.png"
     },
     {
       "Id": "/Users/yusufs/Desktop/Unicon/wwwroot/js/site.js",

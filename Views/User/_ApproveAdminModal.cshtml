@@ -1,0 +1,22 @@
+@model User
+
+<div class="modal fade" id="usr-admin-approve-@Model.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Onay</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start">
+        <b>@Model.UserName</b> kullanıcı adlı üyeye admin rolü verilecektir! <br> Onaylıyor musunuz ?
+      </div>
+      <div class="modal-footer">
+    <form asp-action="AddAdminRoleToUser" asp-route-userId="@Model.Id" method="post">
+        <input type="hidden" value="@Model.Id" name="id">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+        <button type="submit" class="btn btn-primary">Onayla</button>
+    </form>
+      </div>
+    </div>
+  </div>
+</div>

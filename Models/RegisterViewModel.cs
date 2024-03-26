@@ -26,6 +26,7 @@ namespace Unicon.Models
 
         [Required(ErrorMessage = "Parola gereklidir.")]
         [StringLength(100, ErrorMessage = "{0} en az {2} ve en fazla {1} karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$", ErrorMessage = "Parola, en az bir büyük harf, bir küçük harf, bir sayı ve bir özel karakter içermelidir.")]
         [DataType(DataType.Password)]
         [Display(Name = "Parola")]
         public string? Password { get; set; }
