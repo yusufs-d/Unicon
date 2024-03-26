@@ -136,7 +136,8 @@ namespace Unicon.Controllers
         
             }
 
-            var result = await _userManager.DeleteAsync(user);
+            try{
+ var result = await _userManager.DeleteAsync(user);
             if (result.Succeeded)
             {
                 return RedirectToAction("UserList");
@@ -147,6 +148,13 @@ namespace Unicon.Controllers
                 return View("UserList");
 
             }
+            
+            }catch{
+                TempData["DeleteError"] = "Kullanıcı silme başarısız. Kullanıcının yorum yapması buna engel oluyor olabilir. Lütfen kontrol ediniz.";
+                return RedirectToAction("UserList");
+            }
+
+           
         }
 
         [RedirectIfNotAdmin]
