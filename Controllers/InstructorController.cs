@@ -121,15 +121,27 @@ namespace Unicon.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete([FromForm] int id)
         {
-            var kurs = await _context.Instructors.FindAsync(id);
-            if (kurs == null)
+            var instructor = await _context.Instructors.Include(i=> i.CoursesGiven).FirstOrDefaultAsync(i=> i.InstructorId == id);
+            if (instructor == null)
             {
                 return NotFound();
             }
-            _context.Instructors.Remove(kurs);
+            
+            if(instructor.CoursesGiven.Count > 0){
+                TempData["DeleteError"] = "Silme hatası! Öğretim elemanı bir ya da birden fazla dersin öğretim elemanı olarak ayarlanmış. Silmek için öncelikle tüm derslerle ilişiğini kesin.";
+                return RedirectToAction("ManageInstructors");
+
+            }
+
+            _context.Instructors.Remove(instructor);
             await _context.SaveChangesAsync();
             return RedirectToAction("ManageInstructors");
+            
+            
+            
+
         }
+
 
         [RedirectIfNotAdmin]
         public async Task<IActionResult> ManageInstructors()

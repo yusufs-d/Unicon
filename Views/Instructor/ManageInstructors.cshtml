@@ -2,6 +2,12 @@
 
 <h2>Öğretim Elemanı Yönetimi</h2>
 <hr>
+@if(TempData != null && TempData.ContainsKey("DeleteError")){
+    <div class="alert alert-danger">
+        @TempData["DeleteError"].ToString()
+       
+    </div>
+}
 <a class="btn btn-secondary mb-3" asp-action="Create">
     <i class="bi bi-person-add"></i>
     Öğretim Elemanı Ekle
