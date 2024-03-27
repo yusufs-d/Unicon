@@ -2,6 +2,7 @@
 <html lang="tr">
 
 <head>
+ 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@ViewData["Title"] - Unicon</title>
@@ -9,7 +10,7 @@
   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/Unicon.styles.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/css/table.css" asp-append-version="true">
-  <link rel="stylesheet" href="~/css/progressBar.css" asp-append-version="true">
+  <link rel="stylesheet" href="~/css/progress.css" asp-append-version="true">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- Data Table CSS -->
   <link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
@@ -34,42 +35,68 @@
               aria-current="page">Dersler</a></li>
           <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Hocalar</a>
           </li>
-          <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Topluluklar / Kulüpler</a>
+          <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Topluluklar /
+              Kulüpler</a>
           </li>
-          <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Buluşmalar</a>
+          <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors"
+              class="nav-link">Buluşmalar</a>
           </li>
-          <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Değiş Tokuş</a>
+          <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Değiş
+              Tokuş</a>
           </li>
-          <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Araç Arkadaşı</a>
+          <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Araç
+              Arkadaşı</a>
           </li>
           <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Kampüs</a>
           </li>
-          <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Genel Sohbet</a>
+          <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Genel
+              Sohbet</a>
           </li>
           <li class="nav-item"><a asp-controller="Instructor" asp-action="AllInstructors" class="nav-link">Duyurular</a>
           </li>
           @if (User.IsInRole("Admin"))
           {
-            <li class="nav-item"><a asp-controller="Course" asp-action="ManageCourses" class="nav-link">Ders Yönetimi</a>
-            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Admin
+              </a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item"><a asp-controller="Course" asp-action="ManageCourses"
+                    style="text-decoration: none;">Ders
+                    Yönetimi</a>
+                </li>
 
 
 
-            <li class="nav-item"><a asp-controller="Instructor" asp-action="ManageInstructors" class="nav-link">Öğretim
-                Elemanı
-                Yönetimi</a></li>
+                <li class="dropdown-item"><a asp-controller="Instructor" asp-action="ManageInstructors"
+                    style="text-decoration: none;">
+                    Öğretim
+                    Elemanı
+                    Yönetimi</a></li>
 
 
-            <li class="nav-item"><a asp-controller="User" asp-action="UserList" class="nav-link">Kullanıcı Yönetimi</a>
+                <li class="dropdown-item"><a asp-controller="User" asp-action="UserList"
+                    style="text-decoration: none;">Kullanıcı
+                    Yönetimi</a>
+                </li>
+              </ul>
             </li>
 
           }
 
 
-          <form asp-controller="User" asp-action="Logout" method="post">
-            <li class="nav-item"><button type="submit" class="nav-link"><i class="bi bi-box-arrow-right"></i></button>
-            </li>
-          </form>
+
+          @if (User.Identity != null)
+          {
+            <form asp-controller="User" asp-action="Logout" method="post">
+              <li class="nav-item"><button type="submit" class="nav-link">
+                  <span class="text-dark"><b>@User.Identity.Name</b></span> <i
+                    class="bi bi-box-arrow-right text-danger"></i></button>
+
+              </li>
+            </form>
+          }
+
 
 
 
@@ -80,6 +107,51 @@
 
     <div class="container">
       <main role="main" class="pb-3">
+        @if (TempData != null)
+        {
+          if (TempData.ContainsKey("DeleteSuccess") && TempData["DeleteSuccess"] != null)
+          {
+            <div class="alert alert-success">
+              <i class="bi bi-check-circle-fill"></i>
+               @TempData["DeleteSuccess"].ToString()
+            </div>
+          }
+          if (TempData.ContainsKey("DeleteError") && TempData["DeleteError"] != null)
+          {
+            <div class="alert alert-danger">
+              <i class="bi bi-x-circle-fill"></i>
+               @TempData["DeleteError"].ToString()
+            </div>
+          }
+          if (TempData.ContainsKey("CreateSuccess") && TempData["CreateSuccess"] != null)
+          {
+            <div class="alert alert-success">
+              <i class="bi bi-check-circle-fill"></i>
+               @TempData["CreateSuccess"].ToString()
+            </div>
+          }
+          if (TempData.ContainsKey("CreateError") && TempData["CreateError"] != null)
+          {
+            <div class="alert alert-danger">
+              <i class="bi bi-x-circle-fill"></i>
+               @TempData["CreateError"].ToString()
+            </div>
+          }
+          if (TempData.ContainsKey("EditSuccess") && TempData["EditSuccess"] != null)
+          {
+            <div class="alert alert-success">
+              <i class="bi bi-check-circle-fill"></i>
+               @TempData["EditSuccess"].ToString()
+            </div>
+          }
+          if (TempData.ContainsKey("EditError") && TempData["EditError"] != null)
+          {
+            <div class="alert alert-danger">
+              <i class="bi bi-x-circle-fill"></i>
+               @TempData["EditError"].ToString()
+            </div>
+          }
+        }
         @RenderBody()
       </main>
     </div>
@@ -123,7 +195,7 @@
 
     </script>
 
-    
+
 
 
 

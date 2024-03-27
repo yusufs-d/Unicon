@@ -40,10 +40,21 @@ namespace Unicon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Course model)
         {
+            try{
             _context.Courses.Add(model);
             await _context.SaveChangesAsync();
+            TempData["CreateSuccess"] = "Ders başarıyla oluşturuldu!";
             return RedirectToAction("ManageCourses");
+            }catch{
+            TempData["CreateError"] = "Ders oluşturulurken bir sorun oluştu";
+            return View();
+            }
+
+
+
+
         }
+
 
         [RedirectIfNotAdmin]
         [HttpGet]
@@ -77,9 +88,16 @@ namespace Unicon.Controllers
                 return NotFound();
             }
 
+            if(!ModelState.IsValid){
+            TempData["EditError"] = "Ders güncellenirken bir sorun oluştu!";
+
+                return View();
+            }
+
 
             _context.Update(course);
             await _context.SaveChangesAsync();
+            TempData["EditSuccess"] = "Ders başarıyla güncellendi!";
             return RedirectToAction("ManageCourses");
 
         }
@@ -88,14 +106,22 @@ namespace Unicon.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete([FromForm] int id)
         {
+            
             var course = await _context.Courses.FindAsync(id);
-            if (course == null)
+            try{
+                            if (course == null)
             {
                 return NotFound();
             }
             _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
+            TempData["DeleteSuccess"] = "Ders başarıyla silindi!";
             return RedirectToAction("ManageCourses");
+            }catch{
+                TempData["DeleteError"] = "Ders silinirken bir hata ile karşılaşıldı!";
+                return RedirectToAction("ManageCourses");
+            }
+
         }
 
 

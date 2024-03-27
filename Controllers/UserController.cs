@@ -133,28 +133,32 @@ namespace Unicon.Controllers
             if (user == null)
             {
                 return NotFound();
-        
-            }
-
-            try{
- var result = await _userManager.DeleteAsync(user);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("UserList");
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Kullanıcı silme işlemi başarısız oldu.");
-                return View("UserList");
 
             }
-            
-            }catch{
+
+            try
+            {
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    TempData["DeleteSuccess"] = "Kullanıcı başarıyla silindi!";
+                    return RedirectToAction("UserList");
+                }
+                else
+                {
+                    TempData["DeleteError"] = "Kullanıcı silme işlemi başarısız oldu!";
+                    return View("UserList");
+
+                }
+
+            }
+            catch
+            {
                 TempData["DeleteError"] = "Kullanıcı silme başarısız. Kullanıcının yorum yapması buna engel oluyor olabilir. Lütfen kontrol ediniz.";
                 return RedirectToAction("UserList");
             }
 
-           
+
         }
 
         [RedirectIfNotAdmin]
@@ -173,15 +177,20 @@ namespace Unicon.Controllers
                 var createRoleResult = await _roleManager.CreateAsync(adminRole);
                 if (!createRoleResult.Succeeded)
                 {
-                    return StatusCode(500, "Admin rolü oluşturma hatası!");
+                    TempData["CreateError"] = "Admin oluşturma hatası!";
+                    return RedirectToAction("UserList");
                 }
             }
 
             var addToRoleResult = await _userManager.AddToRoleAsync(user, "Admin");
             if (!addToRoleResult.Succeeded)
             {
-                return StatusCode(500, "Admin rolü oluşturma hatası!");
+                TempData["CreateError"] = "Admin oluşturma hatası!";
+                return RedirectToAction("UserList");
+
             }
+            
+            TempData["CreateSuccess"] = string.Format("{0} kullanıcı adlı kullanıcıya admin rolü başarıyla verildi!",user.UserName);
 
             return RedirectToAction("UserList");
         }
@@ -198,9 +207,11 @@ namespace Unicon.Controllers
             var result = await _userManager.RemoveFromRoleAsync(user, "Admin");
             if (!result.Succeeded)
             {
-                return StatusCode(500,"Admin silme işlemi başarısız oldu!");
+                TempData["DeleteError"] = "Admin silme işlemi başarısız oldu!";
+                return RedirectToAction("UserList");
             }
 
+            TempData["DeleteSuccess"] = string.Format("{0} kullanıcıdan admin rolü başarıyla kaldırıldı!",user.UserName);
             return RedirectToAction("UserList");
         }
 
