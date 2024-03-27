@@ -27,51 +27,79 @@ namespace Unicon.Controllers
         }
 
 
-[RedirectIfNotLoggedIn]
-[HttpPost]
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> Create(CommentViewModelBase viewModel, int? commentType)
-{
-    if(commentType == null){
-        return NotFound();
-    }
-    if (ModelState.IsValid)
-    {
-        var user = await _userManager.GetUserAsync(User);
-        if (user != null && viewModel.CommentToAdd != null)
+        [RedirectIfNotLoggedIn]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CommentViewModelBase viewModel, int? commentType)
         {
-            var existingComment = await _context.Comments.FirstOrDefaultAsync(c => c.RelatedID == viewModel.CommentToAdd.RelatedID && c.UserId == user.Id);
-
-            if (existingComment != null)
+            if (commentType == null)
             {
-                ModelState.AddModelError("", "Kullanıcı bu derse daha önce yorum yapmış!");
-                var errorMessagesForExistingComment = ModelState.Values
-                    .SelectMany(v => v.Errors)
-                    .Select(e => e.ErrorMessage)
-                    .ToList();
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null && viewModel.CommentToAdd != null)
+                {
+                    var existingComment = await _context.Comments.FirstOrDefaultAsync(c => c.RelatedID == viewModel.CommentToAdd.RelatedID && c.UserId == user.Id);
 
-                TempData["ErrorMessages"] = errorMessagesForExistingComment.ToArray();
-                if (commentType == 0)
-                {
-                    return RedirectToAction("CourseDetail", "Course", new { id = viewModel.CommentToAdd.RelatedID });
+                    if (existingComment != null)
+                    {
+                        ModelState.AddModelError("", "Kullanıcı daha önce yorum yapmış!");
+                        var errorMessagesForExistingComment = ModelState.Values
+                            .SelectMany(v => v.Errors)
+                            .Select(e => e.ErrorMessage)
+                            .ToList();
+
+                        TempData["ErrorMessages"] = errorMessagesForExistingComment.ToArray();
+                        if (commentType == 0)
+                        {
+                            return RedirectToAction("CourseDetail", "Course", new { id = viewModel.CommentToAdd.RelatedID });
+                        }
+                        if (commentType == 1)
+                        {
+                            return RedirectToAction("InstructorDetail", "Instructor", new { id = viewModel.CommentToAdd.RelatedID });
+                        }
+                    }
+
+                    _context.Comments.Add(new Comment()
+                    {
+                        CommentContent = viewModel.CommentToAdd.CommentContent,
+                        Point = viewModel.CommentToAdd.Point,
+                        CommentType = commentType.Value,
+                        RelatedID = viewModel.CommentToAdd.RelatedID,
+                        UserId = user.Id,
+                        CreateDate = DateTime.UtcNow
+                    });
+
+                    await _context.SaveChangesAsync();
+
+                    if (commentType == 0)
+                    {
+                        TempData["CreteSuccess"] = "Yorum Başarıyla Eklendi!";
+                        return RedirectToAction("CourseDetail", "Course", new { id = viewModel.CommentToAdd.RelatedID });
+                    }
+                    if (commentType == 1)
+                    {
+                        TempData["CreteSuccess"] = "Yorum Başarıyla Eklendi!";
+
+                        return RedirectToAction("InstructorDetail", "Instructor", new { id = viewModel.CommentToAdd.RelatedID });
+                    }
                 }
-                if (commentType == 1)
-                {
-                    return RedirectToAction("InstructorDetail", "Instructor", new { id = viewModel.CommentToAdd.RelatedID });
-                }
+                return NotFound();
             }
 
-            _context.Comments.Add(new Comment()
-            {
-                CommentContent = viewModel.CommentToAdd.CommentContent,
-                Point = viewModel.CommentToAdd.Point,
-                CommentType = commentType.Value,
-                RelatedID = viewModel.CommentToAdd.RelatedID,
-                UserId = user.Id,
-                CreateDate = DateTime.UtcNow
-            });
+            var errorMessagesForCreateComment = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage)
+                .ToList();
 
-            await _context.SaveChangesAsync();
+            TempData["ErrorMessages"] = errorMessagesForCreateComment.ToArray();
+
+            if (viewModel.CommentToAdd == null)
+            {
+                return NotFound();
+            }
 
             if (commentType == 0)
             {
@@ -81,33 +109,9 @@ public async Task<IActionResult> Create(CommentViewModelBase viewModel, int? com
             {
                 return RedirectToAction("InstructorDetail", "Instructor", new { id = viewModel.CommentToAdd.RelatedID });
             }
+
+            return NotFound();
         }
-        return NotFound();
-    }
-
-    var errorMessagesForCreateComment = ModelState.Values
-        .SelectMany(v => v.Errors)
-        .Select(e => e.ErrorMessage)
-        .ToList();
-
-    TempData["ErrorMessages"] = errorMessagesForCreateComment.ToArray();
-
-    if (viewModel.CommentToAdd == null)
-    {
-        return NotFound();
-    }
-
-    if (commentType == 0)
-    {
-        return RedirectToAction("CourseDetail", "Course", new { id = viewModel.CommentToAdd.RelatedID });
-    }
-    if (commentType == 1)
-    {
-        return RedirectToAction("InstructorDetail", "Instructor", new { id = viewModel.CommentToAdd.RelatedID });
-    }
-
-    return NotFound();
-}
 
 
         [RedirectIfNotAdmin]
@@ -136,15 +140,19 @@ public async Task<IActionResult> Create(CommentViewModelBase viewModel, int? com
             await _context.SaveChangesAsync();
             if (commentType == 0)
             {
+                TempData["DeleteSuccess"] = "Yorum başarıyla silindi!";
                 return RedirectToAction("CourseDetail", "Course", new { id = relatedId });
 
             }
 
             if (commentType == 1)
             {
+                TempData["DeleteSuccess"] = "Yorum başarıyla silindi!";
                 return RedirectToAction("InstructorDetail", "Instructor", new { id = relatedId });
 
             }
+
+
 
             return RedirectToAction("Index", "Home");
 

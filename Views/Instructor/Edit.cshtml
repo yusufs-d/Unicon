@@ -8,6 +8,7 @@
 
         <label asp-for="InstructorName" class="form-label"></label>
         <input asp-for="InstructorName" class="form-control">
+        <span asp-validation-for="InstructorName"></span>
 
 
     <input type="hidden" asp-for="InstructorPoint" value="@Model.InstructorPoint">

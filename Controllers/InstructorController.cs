@@ -58,10 +58,10 @@ namespace Unicon.Controllers
                     }
                     await _context.SaveChangesAsync();
                 }
-
+                TempData["CreateSuccess"] = "Öğretim Elemanı başarıyla oluşturuldu!";
                 return RedirectToAction("ManageInstructors");
             }
-
+            TempData["CreateError"] = "Öğretim Elemanı oluşturulurken bir hata oluştu!";
             return View(model);
         }
 
@@ -112,8 +112,11 @@ namespace Unicon.Controllers
                         throw;
                     }
                 }
+                TempData["EditSuccess"] = "Öğretim Elemanı başarıyla güncellendi!";
                 return RedirectToAction("ManageInstructors");
             }
+            TempData["EditSuccess"] = "Öğretim Elemanı güncellenirken bir hata oluştu!";
+
             return View(instructor);
         }
 
@@ -135,6 +138,7 @@ namespace Unicon.Controllers
 
             _context.Instructors.Remove(instructor);
             await _context.SaveChangesAsync();
+            TempData["DeleteSuccess"] = "Öğretim Elemanı başarıyla silindi!";
             return RedirectToAction("ManageInstructors");
             
             
